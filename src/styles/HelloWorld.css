@@ -1,0 +1,178 @@
+/* HelloWorld.css - Animations and styles for the HelloWorld component */
+
+/* Container for the Hello World animation */
+.hello-world-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 100%;
+}
+
+/* Text container styling */
+.text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Base styling for the animated letters */
+.animated-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+  color: transparent;
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease-out;
+}
+
+/* Hello text specific styling */
+.hello-text .animated-letter {
+  background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* World text specific styling */
+.world-text .animated-letter {
+  background: linear-gradient(45deg, #a1c4fd 0%, #c2e9fb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Animation for appearing text */
+.animated-letter.appear {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Circle decoration behind the text */
+.circle-decoration {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1;
+}
+
+/* Animation for showing the circle */
+.circle-decoration.show {
+  opacity: 0.8;
+  transform: scale(1.5);
+}
+
+/* Line decorations on sides of the text */
+.line-decoration {
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transition: all 1s ease-out;
+  top: 50%;
+}
+
+/* Left line positioning */
+.line-decoration.left {
+  right: 50%;
+  margin-right: 120px;
+}
+
+/* Right line positioning */
+.line-decoration.right {
+  left: 50%;
+  margin-left: 120px;
+}
+
+/* Animation for extending the lines */
+.line-decoration.extend {
+  width: 100px;
+}
+
+/* Floating particle styling */
+.particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  top: var(--y);
+  left: var(--x);
+  opacity: 0;
+  animation: float var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+/* Floating animation for particles */
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) translateX(20px);
+  }
+}
+
+/* Hover effect on hello world text */
+.hello-text:hover .animated-letter,
+.world-text:hover .animated-letter {
+  transform: translateY(-5px);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Animation for sequential letter animations */
+@keyframes letterAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 640px) {
+  .animated-letter {
+    font-size: 2.5rem;
+  }
+  
+  .circle-decoration {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .line-decoration.extend {
+    width: 50px;
+  }
+  
+  .line-decoration.left {
+    margin-right: 80px;
+  }
+  
+  .line-decoration.right {
+    margin-left: 80px;
+  }
+}
